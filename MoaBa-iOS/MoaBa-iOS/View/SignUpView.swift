@@ -46,21 +46,7 @@ struct SignUpView: View {
         }
         .padding(.horizontal, 20)
         .navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                HStack(spacing: 0) {
-                    Button {
-                        self.presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Image(systemName: "arrow.left")
-                            .mbFont(size: 16, weight: .semiBold, color: .black)
-                    }
-                    
-                    Text("회원가입")
-                        .mbFont(size: 16, weight: .semiBold, color: .black)
-                }
-            }
-        }
+        .navigationBar(title: "회원가입")
         .onChange(of: viewModel.isSuccessSignin) { isSuccess in
             guard isSuccess else { return }
             self.appState.sceneFlow = .main
