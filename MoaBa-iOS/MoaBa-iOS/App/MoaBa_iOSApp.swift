@@ -22,7 +22,7 @@ struct MoaBa_iOSApp: App {
                 case .auth:
                     StartView()
                 case .main:
-                    MainTabView()
+                    SelectFavoriteView()
                 }
             }
             .navigationBarHidden(true)
