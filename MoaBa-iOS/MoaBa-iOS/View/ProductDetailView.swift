@@ -15,6 +15,8 @@ struct ProductDetailView: View {
     let price: String
     let description: String
     
+    @State var showAlert: Bool = false
+    
     var body: some View {
         ZStack {
             ScrollView {
@@ -64,11 +66,16 @@ struct ProductDetailView: View {
                     .foregroundStyle(Color.MoaBa.purple)
                     .overlay {
                         MBButton(text: "구매하기") {
-                            
+                            self.showAlert.toggle()
                         }
                     }
             }
             .padding(.horizontal, 20)
+        }
+        .alert("구매완료!", isPresented: $showAlert) {
+            Button("확인", role: .cancel) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
         }
     }
 }

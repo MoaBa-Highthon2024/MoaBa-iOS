@@ -37,6 +37,7 @@ struct ProductCell: View {
                 
                 Text(title)
                     .mbFont(size: 14, weight: .medium, color: .black)
+                    .multilineTextAlignment(.leading)
                     .padding(.top, 10)
                 
                 Text("\(price)원")
