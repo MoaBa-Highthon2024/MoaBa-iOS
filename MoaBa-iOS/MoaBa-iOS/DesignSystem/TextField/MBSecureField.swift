@@ -21,7 +21,7 @@ public struct MBSecureField: View {
             HStack(spacing: 8) {
                 ZStack(alignment: .leading) {
                     Text(placeholder)
-                        .mbFont(size: 14, weight: .medium, color: .black)
+                        .mbFont(size: 14, weight: .medium, color: .MoaBa.lightGray)
                         .opacity(text.isEmpty ? 1 : 0)
 
                     Group {
@@ -31,7 +31,7 @@ public struct MBSecureField: View {
                             TextField("", text: $text)
                         }
                     }
-                    .mbFont(size: 14, weight: .medium, color: .MoaBa.lightGray)
+                    .mbFont(size: 14, weight: .medium, color: .black)
                     .onSubmit(onCommit)
                 }
 
@@ -48,5 +48,6 @@ public struct MBSecureField: View {
                 borderColor: .MoaBa.lightGray
             )
         }
+        .textInputAutocapitalization(.never)
     }
 }

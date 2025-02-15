@@ -11,7 +11,18 @@ import SwiftUI
 struct MoaBa_iOSApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                Group {
+                    if KeyChain.read() == nil {
+                        StartView()
+                    }
+                    else {
+                        EmptyView()
+                    }
+                }
+                .navigationBarHidden(true)
+                
+            }
         }
     }
 }

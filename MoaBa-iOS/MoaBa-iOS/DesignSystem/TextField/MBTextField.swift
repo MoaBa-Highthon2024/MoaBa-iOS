@@ -19,11 +19,12 @@ public struct MBTextField: View {
         VStack(alignment: .leading, spacing: 2) {
             ZStack(alignment: .leading) {
                 Text(placeholder)
-                    .mbFont(size: 14, weight: .medium, color: .black)
+                    .mbFont(size: 14, weight: .medium, color: .MoaBa.lightGray)
                     .opacity(text.isEmpty ? 1 : 0)
 
                 TextField("", text: $text)
-                    .mbFont(size: 14, weight: .medium, color: .MoaBa.lightGray)
+                    .textInputAutocapitalization(.never)
+                    .mbFont(size: 14, weight: .medium, color: .black)
                     .onSubmit(onCommit)
             }
             .padding(.horizontal, 16)

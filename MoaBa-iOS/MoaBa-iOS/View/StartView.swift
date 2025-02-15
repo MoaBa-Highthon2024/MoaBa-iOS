@@ -1,10 +1,3 @@
-//
-//  StartView.swift
-//  MoaBa-iOS
-//
-//  Created by MAC on 2/15/25.
-//
-
 import SwiftUI
 
 struct StartView: View {
