@@ -26,7 +26,8 @@ struct StartView: View {
                         .frame(height: 150)
                     
                     RoundedRectangle(cornerRadius: 13)
-                        .frame(width: .infinity, height: 52)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 52)
                         .foregroundStyle(Color.MoaBa.purple)
                         .overlay {
                             MBButton(text: "로그인") {
