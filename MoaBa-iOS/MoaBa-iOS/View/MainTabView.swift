@@ -15,7 +15,7 @@ struct MainTabView: View {
             TabView(selection: $selectedTab) {
                 Group {
                     NavigationStack {
-                        Text("home")
+                        HomeView()
                     }
                     .tag(Tab.home)
                     

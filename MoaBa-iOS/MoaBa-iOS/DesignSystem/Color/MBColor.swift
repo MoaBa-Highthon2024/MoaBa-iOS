@@ -22,6 +22,8 @@ extension Color.MoaBa {
     static let purple = Color("Purple")
     /// #E8DEF8
     static let lightPurple = Color("LightPurple")
+    /// #CCC2DC
+    static let grayPurple = Color(.grayPurple)
     /// #787878
     static let darkGray = Color("DarkGray")
     /// #A4A4A4

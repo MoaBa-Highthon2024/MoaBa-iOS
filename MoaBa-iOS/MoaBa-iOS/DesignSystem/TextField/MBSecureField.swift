@@ -35,10 +35,13 @@ public struct MBSecureField: View {
                     .onSubmit(onCommit)
                 }
 
-                Image(isSecured ? "eye" : "eye.slash")
+                Image(systemName: isSecured ? "eye.splash" : "eye")
                     .resizable()
                     .frame(width: 25, height: 19)
                     .foregroundStyle(Color.MoaBa.gray)
+                    .onTapGesture {
+                        isSecured.toggle()
+                    }
             }
             .padding(.horizontal, 16)
             .frame(height: 48)

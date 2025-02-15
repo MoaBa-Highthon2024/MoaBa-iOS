@@ -4,15 +4,9 @@ import Alamofire
 
 class SignInViewModel: ObservableObject {
     @Published var model: SignInRequest = SignInRequest()
+    @Published var isSuccessSignin = false
     
-    func signIn() {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                      let window = windowScene.windows.first,
-              let viewController = window.rootViewController else {return}
-                
-        let nextVC = UIHostingController(rootView: NavigationView { Text("메인") })
-                nextVC.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-                
+    func signIn() {                
         AF.request("https://highthon10-api.imseo.dev/auth/sign-in",
                    method: .post,
                    parameters: self.model.params,
@@ -25,11 +19,9 @@ class SignInViewModel: ObservableObject {
                        let header = data["header"] as? [String: Any],
                        let body = data["body"] as? [String: Any],
                        let token = body["token"] as? String {
-                        if KeyChain.create(token: token) {
+                        if MBUserDefault.create(token: token) {
                             print("KeyChain 저장 성공")
-                            DispatchQueue.main.async {
-                                viewController.present(nextVC, animated: true)
-                            }
+                            self.isSuccessSignin = true
                         } else {
                             print("KeyChain 저장 실패")
                         }

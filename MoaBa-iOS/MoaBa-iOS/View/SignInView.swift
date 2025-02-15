@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SignInView: View {
+    @AppState var appState
+    @Binding var path: [AuthPath]
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var viewModel = SignInViewModel()
@@ -17,20 +19,16 @@ struct SignInView: View {
             Spacer()
             
             VStack {
-                RoundedRectangle(cornerRadius: 13)
-                    .frame(width: .infinity, height: 52)
-                    .foregroundStyle(Color.MoaBa.purple)
-                    .overlay {
-                        MBButton(text: "로그인") {
-                            viewModel.signIn()
-                        }
-                    }
-                
+                MBButton(text: "로그인") {
+                    viewModel.signIn()
+                }
                 HStack {
                     Text("계정이 없다면?")
                         .mbFont(size: 14, weight: .medium, color: .MoaBa.darkGray)
-                    
-                    NavigationLink(destination: SignUpView()) {
+                    Button {
+                        self.path.removeLast()
+                        self.path.append(.signup)
+                    } label: {
                         Text("회원가입")
                             .mbFont(size: 14, weight: .medium, color: .MoaBa.purple)
                     }
@@ -55,11 +53,15 @@ struct SignInView: View {
                 }
             }
         }
+        .onChange(of: viewModel.isSuccessSignin) { isSuccess in
+            guard isSuccess else { return }
+            self.appState.sceneFlow = .main
+        }
     }
 }
 
 #Preview {
     NavigationView {
-        SignInView()
+        SignInView(path: .constant([.signin]))
     }
 }

@@ -9,20 +9,26 @@ import SwiftUI
 
 @main
 struct MoaBa_iOSApp: App {
+    @ObservedObject var appState: AppStateProvider
+
+    init() {
+        MBUserDefault.delete()
+        self.appState = AppStateProvider(sceneFlow: MBUserDefault.read() == nil ? .auth : .main)
+    }
+
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                Group {
-                    if KeyChain.read() == nil {
-                        StartView()
-                    }
-                    else {
-                        EmptyView()
-                    }
+            Group {
+                switch appState.sceneFlow {
+                case .auth:
+                    StartView()
+                case .main:
+                    MainTabView()
                 }
-                .navigationBarHidden(true)
-                
             }
+            .navigationBarHidden(true)
+            .environmentObject(appState)
+            .animation(.easeInOut, value: appState.sceneFlow)
         }
     }
 }

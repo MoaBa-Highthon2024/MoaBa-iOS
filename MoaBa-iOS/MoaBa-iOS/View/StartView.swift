@@ -1,7 +1,12 @@
 import SwiftUI
 
+enum AuthPath {
+    case signin
+    case signup
+}
+
 struct StartView: View {
-    @State private var path = NavigationPath()
+    @State private var path = [AuthPath]()
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -11,7 +16,7 @@ struct StartView: View {
                 VStack(alignment: .leading) {
                     Spacer()
                     
-                    Image("Logo")
+                    Image(.appLogo)
                         .resizable()
                         .scaledToFit()
                         .padding(.vertical)
@@ -25,36 +30,23 @@ struct StartView: View {
                     Spacer()
                         .frame(height: 150)
                     
-                    RoundedRectangle(cornerRadius: 13)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 52)
-                        .foregroundStyle(Color.MoaBa.purple)
-                        .overlay {
-                            MBButton(text: "로그인") {
-                                path.append("SignInView")
-                            }
-                        }
-                    
-                    RoundedRectangle(cornerRadius: 13)
-                        .frame(width: 360, height: 52)
-                        .foregroundStyle(Color.MoaBa.lightGray)
-                        .overlay {
-                            MBButton(text: "회원가입") {
-                                path.append("SignUpView")
-                            }
-                        }
-                    
+                    MBButton(text: "로그인") {
+                        path.append(.signin)
+                    }
+
+                    MBButton(text: "회원가입", type: .sub) {
+                        path.append(.signup)
+                    }
+                
                     Spacer()
                         .frame(height: 30)
                 }
                 .padding(.horizontal, 20)
             }
-            .navigationDestination(for: String.self) { value in
-                if value == "SignInView" {
-                    SignInView()
-                }
-                if value == "SignUpView" {
-                    SignUpView()
+            .navigationDestination(for: AuthPath.self) { value in
+                switch value {
+                case .signin: SignInView(path: $path)
+                case .signup: SignUpView(path: $path)
                 }
             }
         }

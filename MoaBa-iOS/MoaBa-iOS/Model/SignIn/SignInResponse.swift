@@ -1,11 +1,15 @@
 import Foundation
 
-struct SignInResponse: Codable {
+struct JustResponse: Codable {
+    let header: Header
+}
+
+struct Response<Body: Codable>: Codable {
     let body: Body
     let header: Header
 }
 
-struct Body: Codable {
+struct SignInResponse: Codable {
     let token: String
 }
 
