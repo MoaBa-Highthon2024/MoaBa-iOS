@@ -37,24 +37,25 @@ struct MainTabView: View {
                 .toolbar(.hidden, for: .tabBar)
             }
                         
-            VStack {
+            VStack(spacing: 0) {
                 Spacer()
                 
                 Divider()
                 
                 tabBar
+                    .padding(.vertical, 4)
             }
         }
     }
     
     var tabBar: some View {
-        HStack {
+        HStack(spacing: 0) {
             Spacer()
             
             Button {
                 selectedTab = .home
             } label: {
-                VStack {
+                VStack(spacing: 2) {
                     Image(systemName: "house")
                     
                     Text("Home")
@@ -67,7 +68,7 @@ struct MainTabView: View {
             Button {
                 selectedTab = .shop
             } label: {
-                VStack {
+                VStack(spacing: 2) {
                     Image(systemName: "cart")
                     
                     Text("Shop")
@@ -80,7 +81,7 @@ struct MainTabView: View {
             Button {
                 selectedTab = .chat
             } label: {
-                VStack {
+                VStack(spacing: 2) {
                     Image(systemName: "message")
                     
                     Text("Chat")
@@ -93,7 +94,7 @@ struct MainTabView: View {
             Button {
                 selectedTab = .myPage
             } label: {
-                VStack {
+                VStack(spacing: 2) {
                     Image(systemName: "person.circle")
                     
                     Text("MyPage")
@@ -103,7 +104,7 @@ struct MainTabView: View {
             
             Spacer()
         }
-        .frame(height: 40)
+        .frame(height: 51)
     }
 }
 
