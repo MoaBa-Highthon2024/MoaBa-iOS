@@ -3,7 +3,7 @@ import SwiftUI
 enum FontWeight: String {
     case bold = "Bold"
     case semiBold = "SemiBold"
-    case regular = "Regular"
+    case medium = "Medium"
 }
 
 private struct MBFont: ViewModifier {
