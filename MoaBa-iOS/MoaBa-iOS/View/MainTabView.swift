@@ -15,10 +15,10 @@ struct MainTabView: View {
             ZStack {
                 TabView(selection: $selectedTab) {
                     Group {
-                        HomeView()
+                        HomeView()                    
                             .tag(Tab.home)
                         
-                        Text("shop")
+                        ShopView()
                             .tag(Tab.shop)
                         
                         FavoriteChatView()
