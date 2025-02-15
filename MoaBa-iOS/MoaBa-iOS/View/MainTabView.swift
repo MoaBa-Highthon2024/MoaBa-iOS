@@ -11,39 +11,33 @@ struct MainTabView: View {
     @State private var selectedTab: Tab = .home
     
     var body: some View {
-        ZStack {
-            TabView(selection: $selectedTab) {
-                Group {
-                    NavigationStack {
-                        HomeView()
-                    }
-                    .tag(Tab.home)
-                    
-                    NavigationStack {
-                        ShopView()
-                    }
-                    .tag(Tab.shop)
-                    
-                    NavigationStack {
-                        Text("chat")
-                    }
-                    .tag(Tab.chat)
-                    
-                    NavigationStack {
-                        Text("myPage")
-                    }
-                    .tag(Tab.myPage)
-                }
-                .toolbar(.hidden, for: .tabBar)
-            }
+        NavigationStack {
+            ZStack {
+                TabView(selection: $selectedTab) {
+                    Group {
+                        HomeView()                    
+                            .tag(Tab.home)
                         
-            VStack(spacing: 0) {
-                Spacer()
-                
-                Divider()
-                
-                tabBar
-                    .padding(.vertical, 4)
+                        ShopView()
+                            .tag(Tab.shop)
+                        
+                        FavoriteChatView()
+                            .tag(Tab.chat)
+                        
+                        Text("myPage")
+                            .tag(Tab.myPage)
+                    }
+                }
+                            
+                VStack(spacing: 0) {
+                    Spacer()
+                    
+                    Divider()
+                    
+                    tabBar
+                        .padding(.vertical, 4)
+                        .background(.white)
+                }
             }
         }
     }

@@ -20,6 +20,7 @@ class MBUserDefault {
         return UserDefaults.standard.string(forKey: key) != nil
     }
     
+    @discardableResult
     static func delete() -> Bool {
         UserDefaults.standard.removeObject(forKey: key)
         return UserDefaults.standard.string(forKey: key) == nil

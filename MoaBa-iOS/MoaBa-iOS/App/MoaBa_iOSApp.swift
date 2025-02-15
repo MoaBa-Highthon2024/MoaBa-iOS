@@ -12,7 +12,6 @@ struct MoaBa_iOSApp: App {
     @ObservedObject var appState: AppStateProvider
 
     init() {
-        MBUserDefault.delete()
         self.appState = AppStateProvider(sceneFlow: MBUserDefault.read() == nil ? .auth : .main)
     }
 
@@ -23,7 +22,7 @@ struct MoaBa_iOSApp: App {
                 case .auth:
                     StartView()
                 case .main:
-                    MainTabView()
+                    SelectFavoriteView()
                 }
             }
             .navigationBarHidden(true)
