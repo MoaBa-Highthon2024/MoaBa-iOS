@@ -20,7 +20,7 @@ struct MainTabView: View {
                     .tag(Tab.home)
                     
                     NavigationStack {
-                        Text("shop")
+                        ShopView()
                     }
                     .tag(Tab.shop)
                     
