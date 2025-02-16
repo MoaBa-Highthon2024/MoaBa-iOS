@@ -16,14 +16,14 @@ struct FansChatView: View {
                     ForEach(0..<5, id: \.self) { _ in
                         otherChatCell(content: "hello")
                     }
-                    ForEach(0..<5, id: \.self) { _ in
-                        myChatCell()
-                    }
+                    myChatCell(content: "안녕하세요")
+                    myChatCell(content: "반갑습니다")
+                    myChatCell(content: "여러분")
                     ForEach(0..<5, id: \.self) { _ in
                         otherChatCell(content: "bye")
                     }
                     ForEach(0..<5, id: \.self) { _ in
-                        myChatCell()
+                        myChatCell(content: "ㅎㅇㅎㅇㅎㅇ")
                     }
                 }
             }
@@ -61,12 +61,12 @@ struct FansChatView: View {
     @ViewBuilder
     func otherChatCell(content: String) -> some View {
         HStack(spacing: 10) {
-            Color.orange
+            Image("baseProfile")
+                .resizable()
                 .frame(width: 40, height: 40)
-                .clipShape(Circle())
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("Faker")
+                Text("팬")
                     .mbFont(size: 12, weight: .medium, color: .black)
 
                 HStack(spacing: 10) {
@@ -85,8 +85,8 @@ struct FansChatView: View {
     }
 
     @ViewBuilder
-    func myChatCell() -> some View {
-        Text("asdfkljsdafljkdsfajklafsd")
+    func myChatCell(content: String) -> some View {
+        Text(content)
             .mbFont(size: 14, weight: .medium, color: .black)
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
