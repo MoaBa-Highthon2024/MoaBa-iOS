@@ -39,14 +39,16 @@ struct FansChatView: View {
     @ViewBuilder
     func comment(_ placeholder: String, text: Binding<String>) -> some View {
         HStack(spacing: 0) {
-            Group {
-                if text.wrappedValue.isEmpty {
+            ZStack(alignment: .leading) {
+                Group {
                     Text(placeholder)
-                } else {
+                        .opacity(text.wrappedValue.isEmpty ? 1 : 0)
+                    
                     TextField("", text: text)
                 }
+                .mbFont(size: 14, weight: .medium, color: .MoaBa.darkGray)
             }
-            .mbFont(size: 14, weight: .medium, color: .MoaBa.darkGray)
+
 
             Spacer()
             
@@ -54,8 +56,10 @@ struct FansChatView: View {
                 .resizable()
                 .frame(width: 35, height: 35)
         }
-        .padding(.horizontal, 16)
-        .withBorder(cornerRadius: 30, borderColor: .MoaBa.purple)
+        .frame(height: 40)
+        .padding(.leading, 16)
+        .padding(.trailing, 4)
+        .withBorder(cornerRadius: 8, borderColor: .MoaBa.purple)
     }
 
     @ViewBuilder

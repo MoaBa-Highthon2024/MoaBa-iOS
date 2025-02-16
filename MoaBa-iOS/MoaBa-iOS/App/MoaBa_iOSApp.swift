@@ -12,6 +12,7 @@ struct MoaBa_iOSApp: App {
     @ObservedObject var appState: AppStateProvider
 
     init() {
+//        MBUserDefault.delete()
         self.appState = AppStateProvider(sceneFlow: MBUserDefault.read() == nil ? .auth : .main)
     }
 

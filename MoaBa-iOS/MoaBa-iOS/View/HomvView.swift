@@ -3,6 +3,8 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     
+    @State var isSelectingPost = true
+    @State var width: CGFloat = 100
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -97,6 +99,43 @@ struct HomeView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
     }
+
+    @ViewBuilder
+    func segment() -> some View {
+        let isPost = isSelectingPost
+        VStack(alignment: isPost ? .leading: .trailing, spacing: 0) {
+            HStack(spacing: 8) {
+                Text("공지사항")
+                    .mbFont(size: 14, weight: .semiBold, color: isPost ? .black : .MoaBa.lightGray)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .overlay {
+                        GeometryReader { proxy in
+                            Color.clear.onAppear {
+                                self.width = proxy.size.width
+                            }
+                        }
+                    }
+                    .onTapGesture {
+                        self.isSelectingPost = true
+                    }
+                
+                Text("갤러리")
+                    .mbFont(size: 14, weight: .semiBold, color: !isPost ? .black : .MoaBa.lightGray)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .onTapGesture {
+                        self.isSelectingPost = false
+                    }
+            }
+            
+            Color.black
+                .frame(width: width, height: 1)
+                .animation(.spring(duration: 0.2), value: self.isSelectingPost)
+        }
+        .background(Color.white)
+    }
+
 }
 
 #Preview {

@@ -12,14 +12,17 @@ class SignInViewModel: ObservableObject {
                    parameters: self.model.params,
                    encoding: JSONEncoding.default)
             .validate()
-            .responseJSON { response in
+            .responseJSON { json in
+                print(json)
+            }
+            .response { response in
                 switch response.result {
-                case .success(let jsonResponse):
-                    if let data = jsonResponse as? [String: Any],
-                       let header = data["header"] as? [String: Any],
-                       let body = data["body"] as? [String: Any],
-                       let token = body["token"] as? String {
-                        if MBUserDefault.create(token: token) {
+                case .success(let data):
+                    if let data,
+                       let token = try? JSONDecoder().decode(Response<SignInResponse>.self, from: data) {
+                        print(token)
+                        if MBUserDefault.create(token: token.body.token) {
+                            print("token")
                             print("KeyChain 저장 성공")
                             self.isSuccessSignin = true
                         } else {
