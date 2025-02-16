@@ -7,9 +7,11 @@ struct FavoriteChatView: View {
             VStack(spacing: 0) {
                 header()
 
-                ForEach(0..<15, id: \.self) { index in
-                    chatCell()
-                }
+                chatCell(content: "안녕하세요")
+                chatCell(content: "저는 페이커 대상혁입니다")
+                chatCell(content: "하이톤은 어떠신가요?")
+                chatCell(content: "화이팅 하세요")
+                chatCell(content: "ㅋㅋㅋㅋ")
             }
         }
         .navigationDestination(isPresented: $isMoved) {
@@ -27,18 +29,18 @@ struct FavoriteChatView: View {
     }
 
     @ViewBuilder
-    func chatCell() -> some View {
+    func chatCell(content: String) -> some View {
         HStack(spacing: 10) {
-            Color.orange
+            Image("baseProfile")
+                .resizable()
                 .frame(width: 40, height: 40)
-                .clipShape(Circle())
 
             VStack(alignment: .leading, spacing: 4) {
                 Text("Faker")
                     .mbFont(size: 12, weight: .medium, color: .black)
 
                 HStack(spacing: 10) {
-                    Text("asdfkljsdafljkdsfajklafsd")
+                    Text(content)
                         .mbFont(size: 14, weight: .medium, color: .black)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 5)
